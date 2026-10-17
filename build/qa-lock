@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Serialises test runs: one at a time on this machine.
+#
+# The runs start OllyDbg under wine and screenshot its windows. Two runs in
+# parallel steal each other's focus, mix up the windows, and the measured
+# times come out wrong (paint time is measured in microseconds: one other
+# process competing for the CPU is enough).
+#
+# If the machine already has its own serialiser, put its path in QALOCK and
+# it is used instead. Otherwise this falls back to a lock file with flock.
+#
+#   usage:  build/qa-lock -c 'commands'
+set -euo pipefail
+
+if [ "${1:-}" != "-c" ] || [ $# -lt 2 ]; then
+  echo "usage: $0 -c 'commands'" >&2
+  exit 2
+fi
+
+if [ -n "${QALOCK:-}" ] && [ -x "${QALOCK}" ]; then
+  exec "$QALOCK" -c "$2"
+fi
+
+LOCK=${TMPDIR:-/tmp}/grapholly-qa.lock
+exec 9>"$LOCK"
+if ! flock -w 1800 9; then
+  echo "QA: another run has held the lock for over 30 minutes, giving up" >&2
+  exit 75
+fi
+bash -c "$2"

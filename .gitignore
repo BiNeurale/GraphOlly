@@ -1,0 +1,8 @@
+tools/
+prior-art/
+build/out/
+qa/
+*.zip
+dist/*.zip
+dist/GraphOlly-*/
+!ini/

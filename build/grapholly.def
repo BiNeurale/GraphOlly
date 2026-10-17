@@ -1,0 +1,25 @@
+LIBRARY GRAPHOLLY.DLL
+EXPORTS
+; OllyDbg 1.10 looks up exports with a leading underscore (Borland style):
+; inside OLLYDBG.EXE the strings are "_ODBG_Plugindata" and friends, and that
+; is how the PDK's BOOKMARK.DLL exports them. MinGW would export the bare name
+; and Olly would load the DLL, then unload it without calling anything.
+; Both forms are exported: it costs nothing and covers both conventions.
+  _ODBG_Plugindata = ODBG_Plugindata
+  _ODBG_Plugininit = ODBG_Plugininit
+  _ODBG_Pluginmainloop = ODBG_Pluginmainloop
+  _ODBG_Pluginmenu = ODBG_Pluginmenu
+  _ODBG_Pluginaction = ODBG_Pluginaction
+  _ODBG_Pluginshortcut = ODBG_Pluginshortcut
+  _ODBG_Pluginreset = ODBG_Pluginreset
+  _ODBG_Pluginclose = ODBG_Pluginclose
+  _ODBG_Plugindestroy = ODBG_Plugindestroy
+  ODBG_Plugindata
+  ODBG_Plugininit
+  ODBG_Pluginmainloop
+  ODBG_Pluginmenu
+  ODBG_Pluginaction
+  ODBG_Pluginshortcut
+  ODBG_Pluginreset
+  ODBG_Pluginclose
+  ODBG_Plugindestroy
