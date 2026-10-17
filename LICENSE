@@ -20,7 +20,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
---------------------------------------------------------------------------------
-src/plugin.h and build/Ollydbg.def are part of the OllyDbg 1.10 Plugin
-Development Kit by Oleh Yuschuk and are not covered by the license above; they
-are included under the terms stated in their own headers.
